@@ -3,13 +3,13 @@
 #include <stdlib.h>
 #include "stack.h"
 
-void test0() {
+void test_stack_create() {
     stack* st = stack_create();
     assert(stack_is_empty(st));
     stack_free(st);
 }
 
-void test1() {
+void test_stack_push() {
     stack* st = stack_create();
     stack_push(st, 1);
 
@@ -19,13 +19,13 @@ void test1() {
     stack_free(st);
 }
 
-void test2() {
+void test_stack_peek_empty() {
     stack* st = stack_create();
     assert(stack_peek(st) == 0);
     stack_free(st);
 }
 
-void test3() {
+void test_stack_increase() {
     stack* st = stack_create();
     stack_increase(st);
 
@@ -33,7 +33,7 @@ void test3() {
     stack_free(st);
 }
 
-void test4() {
+void test_stack_overfilled() {
     stack* st = stack_create();
 
     for (int i = 0; i <= 11; i++) {
@@ -44,7 +44,7 @@ void test4() {
     stack_free(st);
 }
 
-void test5() {
+void test_stack_push_and_pop() {
     stack* st = stack_create();
 
     for (int i = 0; i <= 100; i++) {
@@ -60,11 +60,11 @@ void test5() {
 }
 
 int main() {
-    test0();
-    test1();
-    test2();
-    test3();
-    test4();
-    test5();
+    test_stack_create();
+    test_stack_push();
+    test_stack_peek_empty();
+    test_stack_increase();
+    test_stack_overfilled();
+    test_stack_push_and_pop();
     return 0;
 }
