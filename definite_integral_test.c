@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-double eps = 1e-4; //Точность до 4 знаков после запятой
+double eps = 1e-4; //Г’Г®Г·Г­Г®Г±ГІГј Г¤Г® 4 Г§Г­Г ГЄГ®Гў ГЇГ®Г±Г«ГҐ Г§Г ГЇГїГІГ®Г©
 
 int equals(double a, double b) {
     return fabs(a - b) < eps;
@@ -18,38 +18,38 @@ double quadratic_function(double x) {
     return x * x;
 }
 
-void test_0() {
+void test_0_steps() {
     double result = definite_integral(linear_function, -3, 3, 0);
     assert(equals(result, 0));
 }
 
-void test_1() {
+void test_linear_2_steps() {
     double result = definite_integral(linear_function, -3, 3, 2);
     assert(equals(result, 18));
 }
 
-void test_2() {
+void test_linear_1000_steps() {
     double result = definite_integral(linear_function, -3, 3, 1000);
     assert(equals(result, 18));
 }
 
-void test_3() {
-    double result = definite_integral(quadratic_function, -3, 3, 100); //Недостаточно шагов для получения точного результата
+void test_quadratic_low_steps() {
+    double result = definite_integral(quadratic_function, -3, 3, 100);
 
     assert(!equals(result,18));
 }
 
-void test_4() {
+void test_quadratic_many_steps() {
     double result = definite_integral(quadratic_function, -3, 3, 10000);
     assert(equals(result, 18));
 }
 
 int main() {
-    test_0();
-    test_1();
-    test_2();
-    test_3();
-    test_4();
+    test_0_steps();
+    test_linear_2_steps();
+    test_linear_1000_steps();
+    test_quadratic_low_steps();
+    test_quadratic_many_steps();
 
     return 0;
 }
