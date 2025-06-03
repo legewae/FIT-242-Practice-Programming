@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-double eps = 1e-4; //Òî÷íîñòü äî 4 çíàêîâ ïîñëå çàïÿòîé
+double eps = 1e-4;
 
 int equals(double a, double b) {
     return fabs(a - b) < eps;
