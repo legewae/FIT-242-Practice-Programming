@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-double eps = 1e-14; //10^-14, 14 после запятой
+double eps = 1e-14;
 
 void test_zero(){
 	double *roots = NULL;
