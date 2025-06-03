@@ -3,13 +3,13 @@
 #include <stdlib.h>
 #include "linked_list.h"
 
-void test_0() {
+void test_list_create() {
 	node* list = list_create(123);
 	assert(list_length(list) == 1 && list->value == 123);
 	list_free(list);
 }
 
-void test_1() {
+void test_list_end_start() {
 	node* list = list_create(1);
 	list_add_end(&list, 2);
 	list_add_start(&list, 3);
@@ -17,7 +17,7 @@ void test_1() {
 	list_free(list);
 }
 
-void test_2() {
+void test_delete_at() {
 	node* list = list_create(1);
 	list_add_end(&list, 2);
 	list_add_start(&list, 3);
@@ -26,7 +26,7 @@ void test_2() {
 	list_free(list);
 }
 
-void test_3() {
+void test_delete_at_0() {
 	node* list = list_create(1);
 	list_add_end(&list, 2);
 	list_add_start(&list, 3);
@@ -36,7 +36,7 @@ void test_3() {
 	list_free(list);
 }
 
-void test_4() {
+void test_fill_to_100() {
 	node* list = list_create(1);
 	for (int i = 2; i <= 100;i++) {
 		list_add_end(&list, i);
@@ -45,7 +45,7 @@ void test_4() {
 	list_free(list);
 }
 
-void test_5() {
+void test_remove_middle() {
 	node* list = list_create(1);
 	list_add_end(&list, 2);
 	list_add_end(&list, 3);
@@ -56,7 +56,7 @@ void test_5() {
 	assert(list_get(list, 2)->value == 4);
 }
 
-void test_6() {
+void test_add_middle() {
 	node* list = list_create(1);
 	list_add_end(&list, 2);
 	list_add_end(&list, 3);
@@ -69,12 +69,12 @@ void test_6() {
 }
 
 int main() {
-	test_0();
-	test_1();
-	test_2();
-	test_3();
-	test_4();
-	test_5();
-	test_6();
+	test_list_create();
+	test_list_end_start();
+	test_delete_at();
+	test_delete_at_0();
+	test_fill_to_100();
+	test_remove_middle();
+	test_add_middle();
 	return 0;
 }
