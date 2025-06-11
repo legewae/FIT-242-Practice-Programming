@@ -51,3 +51,13 @@ void test_stack_push_and_pop() {
     assert(stack_is_empty(st));
     stack_free(st);
 }
+
+int main() {
+    test_stack_create();
+    test_stack_push();
+    test_stack_peek_empty();
+    test_stack_increase();
+    test_stack_overfilled();
+    test_stack_push_and_pop();
+    return 0;
+}
