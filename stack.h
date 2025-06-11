@@ -4,17 +4,14 @@ typedef struct{
 	int top;
 } stack;
 
-#define DEFAULT_SIZE 10
-#define PLUS_SIZE 5
-
 #define SUCCESS 0
 #define ERROR -1
+#define STACK_OVERFLOW -2
 
-stack* stack_create();
+stack* stack_create(int capacity);
 int stack_push(stack* st, int value);
-int stack_pop(stack* st, int* success);
-int stack_peek(stack* st, int* success);
-int stack_increase(stack* st);
+int stack_pop(stack* st, int* res);
+int stack_peek(stack* st, int* res);
 void stack_free(stack* st);
 int stack_is_empty(stack* st);
 
