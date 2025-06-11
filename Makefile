@@ -21,8 +21,22 @@ definite_integral_test.o: definite_integral_test.c definite_integral.h
 
 definite_integral_test: definite_integral_test.o definite_integral.a
 	gcc -g -o definite_integral_test definite_integral_test.o definite_integral.a -lm
-#/--------------------------/#
-test: definite_integral_test
+
+#/-----quadratic-----/#
+quadratic_solver.o: quadratic_solver.c quadratic_solver.h
+	gcc -g -c quadratic_solver.c -o quadratic_solver.o
+
+quadratic_solver.a: quadratic_solver.o
+	ar rc quadratic_solver.a quadratic_solver.o
+
+quadratic_solver_test.o: quadratic_solver_test.c quadratic_solver.h
+	gcc -g -c quadratic_solver_test.c -o quadratic_solver_test.o
+
+quadratic_solver_test: quadratic_solver_test.o quadratic_solver.a
+	gcc -g -o quadratic_solver_test quadratic_solver_test.o quadratic_solver.a -lm
+#/--------------------/#
+
+test: quadratic_solver_test definite_integral_test
 	@for test in $(shell find . -maxdepth 1 -type f -regex '.*_test$$'); do \
 		echo "Running $$test"; \
 		         ./$$test || exit 1; \
