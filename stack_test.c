@@ -61,7 +61,7 @@ void test_stack_push_and_pop() {
         assert(stack_push(st, i) == SUCCESS);
     }
 
-    for (int i = 100; i > 0; i--) {
+    for (int i = 100; i >= 0; i--) {
         assert(stack_pop(st, &success) == i);
         assert(success == SUCCESS);
     }
