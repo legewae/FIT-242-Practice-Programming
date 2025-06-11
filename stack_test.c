@@ -11,9 +11,11 @@ void test_stack_create() {
 
 void test_stack_push() {
     stack* st = stack_create();
+    int success = 0;
+    
     stack_push(st, 1);
 
-    assert(stack_peek(st) == 1);
+    assert(stack_peek(st, *success) == 1);
     stack_pop(st);
     assert(stack_is_empty(st));
     stack_free(st);
@@ -21,7 +23,9 @@ void test_stack_push() {
 
 void test_stack_peek_empty() {
     stack* st = stack_create();
-    assert(stack_peek(st) == 0);
+    int success = 0;
+    
+    assert(stack_peek(st, *success) == 0);
     stack_free(st);
 }
 
@@ -40,19 +44,22 @@ void test_stack_overfilled() {
         stack_push(st, i);
     }
 
-    assert(stack_pop(st) == 11);
+    int success = 0;
+    assert(stack_pop(st) == 11, *success);
     stack_free(st);
 }
 
 void test_stack_push_and_pop() {
     stack* st = stack_create();
-
+    int success = 0;
+    
     for (int i = 0; i <= 100; i++) {
         stack_push(st, i);
     }
 
     for (int i = 100; i >= 0; i--) {
-        assert(stack_pop(st) == i);
+        assert(stack_pop(st, *success) == i);
+        assert(success == SUCCESS);
     }
 
     assert(stack_is_empty(st));
