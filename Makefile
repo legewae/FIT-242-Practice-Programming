@@ -21,9 +21,50 @@ pool_allocator_test.o: pool_allocator_test.c pool_allocator.h
 
 pool_allocator_test: pool_allocator_test.o pool_allocator.a
 	gcc -g -o pool_allocator_test pool_allocator_test.o pool_allocator.a -lm
-#/-----pool_allocator-----/#
 
-test: pool_allocator_test
+#/----definite-integral----/#
+definite_integral.o: definite_integral.c definite_integral.h
+	gcc -g -c definite_integral.c -o definite_integral.o
+
+#/-----linked_list-----/#
+linked_list.o: linked_list.c linked_list.h
+	gcc -g -c linked_list.c -o linked_list.o
+
+linked_list.a: linked_list.o
+	ar rc linked_list.a linked_list.o
+
+linked_list_test.o: linked_list_test.c linked_list.h
+	gcc -g -c linked_list_test.c -o linked_list_test.o
+
+linked_list_test: linked_list_test.o linked_list.a
+	gcc -g -o linked_list_test linked_list_test.o linked_list.a -lm
+  
+#/---------------------/#
+definite_integral.a: definite_integral.o
+	ar rc definite_integral.a definite_integral.o
+
+definite_integral_test.o: definite_integral_test.c definite_integral.h
+	gcc -g -c definite_integral_test.c -o definite_integral_test.o
+
+definite_integral_test: definite_integral_test.o definite_integral.a
+	gcc -g -o definite_integral_test definite_integral_test.o definite_integral.a -lm
+
+#/-----quadratic-----/#
+quadratic_solver.o: quadratic_solver.c quadratic_solver.h
+	gcc -g -c quadratic_solver.c -o quadratic_solver.o
+
+quadratic_solver.a: quadratic_solver.o
+	ar rc quadratic_solver.a quadratic_solver.o
+
+quadratic_solver_test.o: quadratic_solver_test.c quadratic_solver.h
+	gcc -g -c quadratic_solver_test.c -o quadratic_solver_test.o
+
+quadratic_solver_test: quadratic_solver_test.o quadratic_solver.a
+	gcc -g -o quadratic_solver_test quadratic_solver_test.o quadratic_solver.a -lm
+#/--------------------/#
+
+test: quadratic_solver_test definite_integral_test linked_list_test pool_allocator_test
+
 	@for test in $(shell find . -maxdepth 1 -type f -regex '.*_test$$'); do \
 		echo "Running $$test"; \
 		         ./$$test || exit 1; \
