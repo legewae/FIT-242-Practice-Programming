@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include "stack.h"
 
-stack* stack_create() {
+stack* stack_create(int capacity) {
 	stack* st = malloc(sizeof(stack));
-	st->size = DEFAULT_SIZE;
+	st->size = capacity;
 	st->top = 0;
 	st->data = malloc(st->size * sizeof(int));
 	if (st->data == NULL) {
@@ -14,12 +14,6 @@ stack* stack_create() {
 	return st;
 }
 
-int stack_increase(stack* st) {
-	st->size += PLUS_SIZE;
-	st->data = realloc(st->data, st->size * sizeof(int));
-	if (st->data == NULL) return ERROR; 
-	return SUCCESS;
-}
 
 int stack_is_empty(stack* st) {
 	return st->top == 0;
@@ -27,8 +21,7 @@ int stack_is_empty(stack* st) {
 
 int stack_push(stack* st,int value){
 	if (st->top >= st->size) {
-		int success = stack_increase(st);
-		if (success == ERROR) return ERROR;
+		return STACK_OVERFLOW;
 	};
 
 	st->data[st->top] = value;
@@ -36,20 +29,20 @@ int stack_push(stack* st,int value){
 	return SUCCESS;
 }
 
-int stack_pop(stack* st, int* success) {
-	if (stack_is_empty(st)){ *success = ERROR; return 0;}
+int stack_pop(stack* st, int* res) {
+	if (stack_is_empty(st)){ *res = 0; return ERROR;}
 
 	st->top--;
-	*success = SUCCESS;
-	return st->data[st->top];
+	*res = st->data[st->top];
+	return SUCCESS;
 }
 
 
-int stack_peek(stack* st, int* success) {
-	if (stack_is_empty(st)){ *success = ERROR; return 0;}
-	*success = SUCCESS;
+int stack_peek(stack* st, int* res) {
+	if (stack_is_empty(st)){ *res = 0; return ERROR;}
+	*res = st->data[st->top - 1];
 
-	return st->data[st->top-1];
+	return SUCCESS;
 }
 
 void stack_free(stack* st) {
