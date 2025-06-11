@@ -17,3 +17,4 @@ int stack_peek(stack* st, int* success);
 int stack_increase(stack* st);
 void stack_free(stack* st);
 int stack_is_empty(stack* st);
+
