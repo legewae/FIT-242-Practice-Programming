@@ -35,3 +35,4 @@ void linear_allocator_free(linear_allocator* allocator) {
 	free(allocator->memory);
 	free(allocator);
 }
+
