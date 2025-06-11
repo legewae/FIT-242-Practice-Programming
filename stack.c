@@ -36,16 +36,18 @@ int stack_push(stack* st,int value){
 	return SUCCESS;
 }
 
-int stack_pop(stack* st) {
-	if (stack_is_empty(st)) return 0;
+int stack_pop(stack* st, int* success) {
+	if (stack_is_empty(st)){ *success = ERROR; return 0;}
 
 	st->top--;
+	*success = SUCCESS;
 	return st->data[st->top];
 }
 
 
-int stack_peek(stack* st) {
-	if (stack_is_empty(st)) return 0;
+int stack_peek(stack* st, int* success) {
+	if (stack_is_empty(st)){ *success = ERROR; return 0;}
+	*success = SUCCESS;
 
 	return st->data[st->top-1];
 }
