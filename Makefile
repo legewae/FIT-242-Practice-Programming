@@ -13,6 +13,20 @@ fmt_mac:
 definite_integral.o: definite_integral.c definite_integral.h
 	gcc -g -c definite_integral.c -o definite_integral.o
 
+#/-----linked_list-----/#
+linked_list.o: linked_list.c linked_list.h
+	gcc -g -c linked_list.c -o linked_list.o
+
+linked_list.a: linked_list.o
+	ar rc linked_list.a linked_list.o
+
+linked_list_test.o: linked_list_test.c linked_list.h
+	gcc -g -c linked_list_test.c -o linked_list_test.o
+
+linked_list_test: linked_list_test.o linked_list.a
+	gcc -g -o linked_list_test linked_list_test.o linked_list.a -lm
+  
+#/---------------------/#
 definite_integral.a: definite_integral.o
 	ar rc definite_integral.a definite_integral.o
 
@@ -36,7 +50,7 @@ quadratic_solver_test: quadratic_solver_test.o quadratic_solver.a
 	gcc -g -o quadratic_solver_test quadratic_solver_test.o quadratic_solver.a -lm
 #/--------------------/#
 
-test: quadratic_solver_test definite_integral_test
+test: quadratic_solver_test definite_integral_test linked_list_test
 	@for test in $(shell find . -maxdepth 1 -type f -regex '.*_test$$'); do \
 		echo "Running $$test"; \
 		         ./$$test || exit 1; \
