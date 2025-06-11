@@ -56,3 +56,4 @@ int main() {
 	test_diff_types();
 	return 0;
 }
+
